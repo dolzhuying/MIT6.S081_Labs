@@ -455,7 +455,7 @@ void pass_primes(int*pf){//pipe_former，当前进程与上一个进程通信的
     int read_num,t;
     if(pid>0){
         close(pl[0]);//当前进程为父进程，关闭pipelatter的读端
-        while(read(pf[0],&read_num,sizeof(read_num)>0)){//逐个读取父进程传递的数字，是素数则向下一个进程传递
+        while(read(pf[0],&read_num,4)==4)){//逐个读取父进程传递的数字，是素数则向下一个进程传递(32位int)
             if(read_num%prime){
                 t=read_num;
                 write(pl[1],&t,sizeof(t));
